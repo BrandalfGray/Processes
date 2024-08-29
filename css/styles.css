@@ -1,0 +1,37 @@
+body {
+    background-image: url('../images/background.jpg'); /* Path to your background image */
+    background-size: cover; /* Adjusts the size of the background image to cover the entire page */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-color: #f8f9fa; /* Fallback color if image fails to load */
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.auth-form {
+    margin-bottom: 0px;
+}
+
+.form-group {
+    margin-bottom: 0px;
+}
+
+.btn {
+    width: 100%;
+}
+
+hr {
+    margin: 20px 0;
+}
