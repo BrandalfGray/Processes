@@ -1,12 +1,12 @@
 <?php
     // take incoming JSON package
-    $inDtata = getRequestInfo();
+    $inData = getRequestInfo();
     // set variable to default values
     $id = 0;
     $firstName = "";
     $lastName = "";
     // connecting API endpoint to the database
-    $conn = new mysqli("localhost", "TheBeast", "cop4331Cteamone", "COP4331");
+    $conn = new mysqli("143.198.189.240", "TheBeast", "WeLoveCOP4331", "COP4331");
     // Check connection
     if ($conn->connect_error) {
         // die(json_encode(["error" => "Connection failed"]));
