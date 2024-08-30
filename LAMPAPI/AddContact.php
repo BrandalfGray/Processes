@@ -13,7 +13,7 @@ $email = $inData["Email"];
 $userId = $inData["UserID"]; // ID of the user who owns the contact
 
 // Connect to the database
-$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
+$conn = new mysqli("143.198.189.240", "TheBeast", "WeLoveCOP4331", "COP4331");
 
 // Check the database connection
 if ($conn->connect_error) {
@@ -25,7 +25,11 @@ if ($conn->connect_error) {
 
     // Execute the statement and check for success
     if ($stmt->execute()) {
-        returnWithInfo("Contact added successfully.");
+        // Get the ID of the newly inserted contact
+        $newContactId = $stmt->insert_id;
+        
+        // Return detailed information about the new contact
+        returnWithInfo($newContactId, $name, $phone, $email, $userId);
     } else {
         returnWithError($stmt->error);
     }
@@ -55,10 +59,17 @@ function returnWithError($err)
     sendResultInfoAsJson($retValue);
 }
 
-// Function to return success messages
-function returnWithInfo($message)
+// Function to return success messages with contact details
+function returnWithInfo($id, $name, $phone, $email, $userId)
 {
-    $retValue = array("message" => $message);
+    $retValue = array(
+        "ID" => $id,
+        "Name" => $name,
+        "Phone" => $phone,
+        "Email" => $email,
+        "UserID" => $userId,
+        "error" => ""
+    );
     sendResultInfoAsJson($retValue);
 }
 ?>
