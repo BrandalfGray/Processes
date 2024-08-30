@@ -23,19 +23,15 @@
     // Check connection
     if ($conn->connect_error) {
         returnWithError($conn->connect_error);
-    }
-    else
-    {
+    } else {
         $stmt = $conn->prepare("SELECT ID, firstName, lastName FROM Users WHERE Login = ? AND Password = ?");
-        // Make sure the capitalization is the same as in JSON if any errors occur
         $stmt->bind_param("ss", $inData["Login"], $inData["Password"]);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($row = $result->fetch_assoc()) {
             returnWithInfo($row['firstName'], $row['lastName'], $row['ID']);
-        }
-        else {
+        } else {
             returnWithError("No Records Found");
         }
 
@@ -50,18 +46,28 @@
     function sendResultsInfoAsJson($obj)
     {
         header('Content-type: application/json');
-        echo $obj;
+        echo json_encode($obj); // Encode the array/object as JSON
     }
 
     function returnWithError($err)
     {
-        $retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+        $retValue = array(
+            "id" => 0,
+            "firstName" => "",
+            "lastName" => "",
+            "error" => $err
+        );
         sendResultsInfoAsJson($retValue);
     }
 
     function returnWithInfo($firstName, $lastName, $id)
     {
-        $retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+        $retValue = array(
+            "id" => $id,
+            "firstName" => $firstName,
+            "lastName" => $lastName,
+            "error" => ""
+        );
         sendResultsInfoAsJson($retValue);
     }
 ?>
