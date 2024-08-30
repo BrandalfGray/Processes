@@ -1,27 +1,58 @@
 <?php
-header('Content-Type: application/json');
+    // take incoming JSON package
+    $inDtata = getRequestInfo();
+    // set variable to default values
+    $id = 0;
+    $firstName = "";
+    $lastName = "";
+    // connecting API endpoint to the database
+    $conn = new mysqli("localhost", "TheBeast", "cop4331Cteamone", "COP4331");
+    // Check connection
+    if ($conn->connect_error) {
+        // die(json_encode(["error" => "Connection failed"]));
+        returnWithError($conn->connect_error);
+    }
+    else
+    {
+        $stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Login=? AND Password =?");
+        // make sure the capitalization is the same as in JSON if any errors occur
+        $stmt->bind_param("ss", $indata["login"], $inData["password"]);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-// Database connection (replace with your actual database details)
-$conn = new mysqli("cop4331team1.com", "TheBeast", "cop4331Cteamone", "Users");
+        if ( $row = $result->fetch_assoc() )
+        {
+            returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
+        }
+        else
+        {
+            returnWithError("No Records Found");
+        }
+        $stmt->close();
+        $stmt->close();
+    }
 
-// Check connection
-if ($conn->connect_error) {
-    die(json_encode(["error" => "Connection failed"]));
-}
+    function getRequestInfo()
+    {
+        return json_decode(file_get_contents('php://input'), true);
+    }
 
-// Get POST data
-$data = json_decode(file_get_contents('php://input'), true);
-$username = $data['username'];
-$password = $data['password'];
+    function sendResultsInfoAsJson( $obj )
+    {
+        header('Content-type: application/json');
+        echo $obj;
+    }
 
-// Simple query to check username and password (for demonstration only)
-$result = $conn->query("SELECT * FROM users WHERE username='$username'");
-
-if ($result->num_rows === 0) {
-    echo json_encode(["error" => "Invalid credentials"]);
-} else {
-    echo json_encode(["message" => "Login successful"]);
-}
-
-$conn->close();
+	function returnWithError( $err )
+	{
+		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+		sendResultInfoAsJson( $retValue );
+	}
+	
+	function returnWithInfo( $firstName, $lastName, $id )
+	{
+		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+		sendResultInfoAsJson( $retValue );
+	}
+    
 ?>
