@@ -13,7 +13,7 @@ $email = $inData["Email"];
 $userId = $inData["UserID"]; // ID of the user who owns the contact
 
 // Connect to the database
-$conn = new mysqli("143.198.189.240", "TheBeast", "WeLoveCOP4331", "COP4331");
+$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 
 // Check the database connection
 if ($conn->connect_error) {
