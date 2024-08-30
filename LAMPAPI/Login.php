@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 // Database connection (replace with your actual database details)
-$conn = new mysqli("cop4331team1.com", "root", "cop4331Cteamone", "Users");
+$conn = new mysqli("cop4331team1.com", "TheBeast", "cop4331Cteamone", "Users");
 
 // Check connection
 if ($conn->connect_error) {
