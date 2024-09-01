@@ -26,7 +26,7 @@ if ($conn->connect_error) {
     // Execute the statement and check for success
     if ($stmt->execute()) {
         if ($stmt->affected_rows > 0) {
-            returnWithInfo("Contact updated successfully.");
+            returnWithInfo($id, $name, $phone, $email);
         } else {
             returnWithError("No contact found with the given ID.");
         }
@@ -60,9 +60,13 @@ function returnWithError($err)
 }
 
 // Function to return success messages
-function returnWithInfo($message)
+function returnWithInfo($id, $name, $phone, $email)
 {
-    $retValue = array("message" => $message);
+    $retValue = array(
+        "ID" => $id,
+        "Name" => $name,
+        "Phone" => $phone,
+        "Email" => $email);
     sendResultInfoAsJson($retValue);
 }
 ?>
