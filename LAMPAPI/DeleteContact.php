@@ -57,9 +57,12 @@ function returnWithError($err)
 }
 
 // Function to return success messages
-function returnWithInfo($message)
+function returnWithInfo($id)
 {
-    $retValue = array("message" => $message);
+    $retValue = array(
+        "ID" => $id,
+        "error" => ""
+    );
     sendResultInfoAsJson($retValue);
 }
 ?>
