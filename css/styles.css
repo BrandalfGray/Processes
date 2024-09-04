@@ -7,20 +7,8 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 h1 {
     text-align: center;
-    margin-bottom: 0px;
-}
-
-.auth-form {
     margin-bottom: 0px;
 }
 
@@ -34,4 +22,76 @@ h1 {
 
 hr {
     margin: 20px 0;
+}
+
+.ucf-title {
+    font-family: 'Anton', sans-serif;
+    color: #FFC904; /* UCF Gold */
+    text-transform: uppercase; /* Make the text uppercase */
+    letter-spacing: 4px; /* Add spacing between letters */
+    font-weight: bold;
+    text-shadow: 3px 3px 6px #000; /* Create a shadow for a strong, logo-like effect */
+	font-size: 3rem; /* Adjust font size */
+	margin-top: 20px; /* Adjust top margin */
+	margin-bottom: 30px; /* Adjust bottom margin */
+	
+}
+
+.ucf-title-link {
+    color: #FFC904; /* UCF Gold by default */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.6s ease; /* Smooth transition for color change */
+}
+
+.ucf-title:hover {
+    color: #000; /* Change to black on hover */
+	text-shadow: 3px 3px 6px #FFC904; /* Create a shadow for a strong, logo-like effect */
+}
+
+.login-link {
+    font-family: 'Anton', sans-serif; /* Same font as title */
+    color: #FFC904; /* UCF Gold */
+    font-size: 1.5rem; /* Adjust size as needed */
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none; /* Remove underline */
+    display: inline-block;
+    margin-top: 10px; /* Space above the link */
+    padding: 5px 15px;
+    border: 2px solid #FFC904; /* Gold border */
+    border-radius: 5px;
+    background-color: #000; /* Black background */
+    text-shadow: 1px 1px 2px #000; /* Subtle shadow */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover transition */
+	letter-spacing: 2px; /* Add spacing between letters */
+}
+
+.login-link:hover {
+    background-color: #FFC904; /* Gold background on hover */
+    color: #000; /* Black text on hover */
+	text-shadow: 0px 0px 0px #000; /* Create a shadow for a strong, logo-like effect */
+}
+
+
+.auth-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.auth-form h2 {
+    margin-bottom: 20px;
+}
+
+.auth-form .form-group {
+    margin-bottom: 15px;
+}
+
+.auth-form .btn {
+    margin-top: 10px;
+}
+
+#dashboard-container {
+    /* Add styles for the dashboard when it's visible */
 }
