@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Optional: Bootstrap for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+
+  
+  
+<body>
+	<div class="custom-container mt-5">
+			<h1 class="text-center mb-4 ucf-text">
+				Welcome User
+			</h1>
+			<div class="row justify-content-center">
+				<div class="col-md-8">
+					<!-- Form Group for Search Bar and Button -->
+					<div class="form-group d-flex align-items-center">
+						<!-- Search Bar -->
+						<input type="text" id="searchInput" class="form-control search-input mr-2" placeholder="Search Contacts..." onkeyup="searchContacts()">
+						
+						<!-- Search Button -->
+						<button class="search-button" onclick="searchContacts()">
+							<span>&#128269;</span> <!-- Unicode character for magnifying glass -->
+						</button>
+					</div>
+
+					<!-- Table to Display Contacts -->
+					<table class="table table-striped table-custom">
+						<thead>
+							<tr>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Email</th>
+								<th>Phone</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody id="contactsTable">
+							<!-- Contacts will be populated here via JavaScript -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- JavaScript to Fetch and Display Contacts -->
+		<script src="js/code.js"></script>
+</body>
+</html>
