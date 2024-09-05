@@ -48,6 +48,69 @@ hr {
 	text-shadow: 3px 3px 6px #FFC904; /* Create a shadow for a strong, logo-like effect */
 }
 
+.ucf-text {
+    font-family: 'Anton', sans-serif;
+    color: #FFC904; /* UCF Gold */
+    text-transform: uppercase; /* Make the text uppercase */
+    letter-spacing: 4px; /* Add spacing between letters */
+    font-weight: bold;
+    text-shadow: 3px 3px 6px #000; /* Create a shadow for a strong, logo-like effect */
+	font-size: 3rem; /* Adjust font size */
+	margin-top: 20px; /* Adjust top margin */
+	margin-bottom: 30px; /* Adjust bottom margin */
+	
+}
+
+/* Add UCF colors and styling to table headers */
+.table thead th {
+    background-color: #FFC904; /* UCF Gold */
+    color: #000; /* Black text */
+    text-transform: uppercase; /* Make the text uppercase */
+    font-weight: bold; /* Bold text */
+    letter-spacing: 1px; /* Add spacing between letters */
+}
+
+.custom-container {
+    max-width: 2500px; /* Adjust to your desired width */
+    margin: 0 auto; /* Center the container */
+}
+
+.search-button {
+    border-radius: 50%; /* Makes the button circular */
+    width: 40px; /* Adjust size as needed */
+    height: 40px; /* Adjust size as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFC904; /* UCF Gold */
+    border: none;
+    color: #FFF;
+    cursor: pointer;
+    margin-left: 10px; /* Space between input and button */
+}
+
+.search-button:hover {
+    background-color: #FFD700; /* Slightly different gold on hover */
+}
+
+/* Optional: Adjust the width of the search input */
+.form-control {
+    flex: 1; /* Takes up remaining space in flex container */
+}
+
+.search-input {
+    max-width: 80%; /* Adjust to make it less wide */
+    flex: 1;
+}
+
+.custom-container .table-custom {
+    width: 120% !important; /* Ensures the table takes up the full width of its container */
+    max-width: 3000px; /* Set a maximum width if needed */
+    margin: 0 auto; /* Center the table within its container */
+}
+
+
+
 .login-link {
     font-family: 'Anton', sans-serif; /* Same font as title */
     color: #FFC904; /* UCF Gold */
