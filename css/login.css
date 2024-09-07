@@ -14,8 +14,8 @@ body {
     background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* Prevents the image from repeating */
     background-color: #ffffff; /* Fallback color if image fails to load */
-}
-
+} 
+	
 .forms-section {
     display: flex; /* Makes it a flex container */
     flex-direction: column; /* Aligns forms vertically */
