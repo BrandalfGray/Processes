@@ -71,9 +71,41 @@ hr {
 }
 
 .custom-container {
-    max-width: 2500px; /* Adjust to your desired width */
-    margin: 0 auto; /* Center the container */
+    max-width: 2500px;
+    margin: 0 auto;
+    min-height: 100vh; /* Ensure full viewport height */
 }
+
+.sidenav {
+    height: 100%; /* Full height */
+    width: 200px; /* Width of the side navigation */
+    position: fixed; /* Fixed position */
+    top: 0;
+    left: 0;
+    background-color: #000; /* Dark background color */
+    padding-top: 20px; /* Space at the top */
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+.sidenav a, .sidenav button {
+    display: block;
+    padding: 8px 16px;
+    font-size: 25px;
+    color: #FFC904; /* Set the initial text color */
+    text-align: left;
+    text-decoration: none; /* Remove underline from links */
+    border: none; /* Remove border from button */
+    background: none; /* Remove background from button */
+    width: 100%; /* Ensure buttons take full width */
+    cursor: pointer; /* Make it look like a clickable element */
+}
+
+/* Hover effect for sidenav links and buttons */
+.sidenav a:hover, .sidenav button:hover {
+    color: blue; /* Change text color on hover */
+    text-decoration: underline; /* Add underline on hover */
+}
+
 
 .search-button {
     border-radius: 50%; /* Makes the button circular */
