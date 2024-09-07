@@ -125,6 +125,17 @@ hr {
     background-color: #FFD700; /* Slightly different gold on hover */
 }
 
+.search-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.search-button:focus span {
+    outline: none;
+    box-shadow: none;
+}
+
+
 /* Optional: Adjust the width of the search input */
 .form-control {
     flex: 1; /* Takes up remaining space in flex container */
