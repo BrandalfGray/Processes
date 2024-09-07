@@ -61,14 +61,34 @@ hr {
 	
 }
 
-/* Add UCF colors and styling to table headers */
-.table thead th {
+/* Custom Table Styles */
+.table-custom thead th {
     background-color: #FFC904; /* UCF Gold */
     color: #000; /* Black text */
     text-transform: uppercase; /* Make the text uppercase */
     font-weight: bold; /* Bold text */
     letter-spacing: 1px; /* Add spacing between letters */
 }
+
+.table-custom tbody tr {
+    background-color: #f9f9f9; /* Light gray background for rows */
+}
+
+.table-custom tbody tr:hover {
+    background-color: #e2e2e2; /* Slightly darker gray on hover */
+}
+
+.table-custom tbody td {
+    background-color: #f9f9f9; /* Light gray background for all cells */
+    color: #333; /* Dark gray text color for all cells */
+    padding: 10px; /* Add some padding for spacing */
+}
+
+.table-custom tbody tr:nth-child(even) td {
+    background-color: #f2f2f2; /* Slightly different background for even rows */
+}
+
+
 
 .custom-container {
     max-width: 2500px;
@@ -107,7 +127,7 @@ hr {
 }
 
 
-.search-button {
+.custom-button {
     border-radius: 50%; /* Makes the button circular */
     width: 40px; /* Adjust size as needed */
     height: 40px; /* Adjust size as needed */
@@ -121,16 +141,16 @@ hr {
     margin-left: 10px; /* Space between input and button */
 }
 
-.search-button:hover {
+.custom-button:hover {
     background-color: #FFD700; /* Slightly different gold on hover */
 }
 
-.search-button:focus {
+.custom-button:focus {
     outline: none;
     box-shadow: none;
 }
 
-.search-button:focus span {
+.custom-button:focus span {
     outline: none;
     box-shadow: none;
 }
