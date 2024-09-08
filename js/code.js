@@ -288,6 +288,18 @@ function doLogout() {
 //Table function
 
 //Add Contact function
+function addContact()
+{
+  let firstName = document.getElementsById("contact-first").value;
+  let lastName = document.getElementsById("contact-last").value;
+  let phone = document.getElementsById("contact-phone").value;
+  let email = document.getElementsById("contact-email").value;
+
+  if(!validContact(firstName, lastName, phone, email)) //Create Valid Contact function
+  {
+    
+  }
+}
 
 //Search Contact function
 
