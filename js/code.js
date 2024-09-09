@@ -258,7 +258,7 @@ function readCookie() {
   userId = -1;
   let data = document.cookie;
   let splits = data.split(";");
-  for (var i = 1; i < splits.length; i++) {
+  for (var i = 0; i < splits.length; i++) {
     let thisOne = splits[i].trim();
     let tokens = thisOne.split("=");
     if (tokens[0] == "firstName") {
