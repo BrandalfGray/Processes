@@ -63,7 +63,7 @@ function doRegister() {
   let tmp = {
     firstName: firstName,
     lastName: lastName,
-    login: login,
+    login: userName,
     password: password,
   };
   let jsonPayload = JSON.stringify(tmp);
@@ -72,7 +72,7 @@ function doRegister() {
 
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-type", "application/json; charset = UTF-8");
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
   try {
     xhr.onreadystatechange = function () {
@@ -288,18 +288,18 @@ function doLogout() {
 //Table function
 
 //Add Contact function
-function addContact()
-{
-  let firstName = document.getElementsById("contact-first").value;
-  let lastName = document.getElementsById("contact-last").value;
-  let phone = document.getElementsById("contact-phone").value;
-  let email = document.getElementsById("contact-email").value;
+// function addContact()
+// {
+//   let firstName = document.getElementsById("contact-first").value;
+//   let lastName = document.getElementsById("contact-last").value;
+//   let phone = document.getElementsById("contact-phone").value;
+//   let email = document.getElementsById("contact-email").value;
 
-  if(!validContact(firstName, lastName, phone, email)) //Create Valid Contact function
-  {
+//   if(!validContact(firstName, lastName, phone, email)) //Create Valid Contact function
+//   {
     
-  }
-}
+//   }
+// }
 
 //Search Contact function
 
