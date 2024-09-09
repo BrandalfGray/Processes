@@ -40,7 +40,7 @@ function doLogin() {
         firstName = jsonObject.firstName;
         lastName = jsonObject.lastName;
 
-        saveCookie();
+        saveCookie(firstName, lastName, userId);
 
         window.location.href = "color.html";
       }
@@ -161,7 +161,7 @@ function searchContacts() {
     let rows = table.getElementsByTagName('tr');
 
     // Loop through all rows
-    for (let i = 0; i < rows.length; i++) {
+    for (let i = 1; i < rows.length; i++) {
         let cells = rows[i].getElementsByTagName('td');
         let rowContainsSearchTerm = false;
 
@@ -212,7 +212,7 @@ function updateContact() {
     const rows = table.getElementsByTagName('tr');
 
     // Find the row with the matching contact ID
-    for (let i = 0; i < rows.length; i++) {
+    for (let i = 1; i < rows.length; i++) {
         if (rows[i].getAttribute('data-contact-id') == contactId) {
             // Get updated values from the form fields
             const firstName = document.getElementById('editContactTextFirst').value;
@@ -239,16 +239,16 @@ function updateContact() {
 
 
 
-function saveCookie() {
+function saveCookie(firstName, lastName, userId) {
   let minutes = 20;
   let date = new Date();
   date.setTime(date.getTime() + minutes * 60 * 1000);
   document.cookie =
     "firstName=" +
     firstName +
-    ",lastName=" +
+    ";lastName=" +
     lastName +
-    ",userId=" +
+    "; userId=" +
     userId +
     ";expires=" +
     date.toGMTString();
@@ -257,8 +257,8 @@ function saveCookie() {
 function readCookie() {
   userId = -1;
   let data = document.cookie;
-  let splits = data.split(",");
-  for (var i = 0; i < splits.length; i++) {
+  let splits = data.split(";");
+  for (var i = 1; i < splits.length; i++) {
     let thisOne = splits[i].trim();
     let tokens = thisOne.split("=");
     if (tokens[0] == "firstName") {
@@ -273,7 +273,7 @@ function readCookie() {
   if (userId < 0) {
     window.location.href = "index.html";
   } else {
-    //		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+    //	document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
   }
 }
 
@@ -284,23 +284,5 @@ function doLogout() {
   document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
   window.location.href = "index.html";
 }
-
-//Table function
-
-//Add Contact function
-// function addContact()
-// {
-//   let firstName = document.getElementsById("contact-first").value;
-//   let lastName = document.getElementsById("contact-last").value;
-//   let phone = document.getElementsById("contact-phone").value;
-//   let email = document.getElementsById("contact-email").value;
-
-//   if(!validContact(firstName, lastName, phone, email)) //Create Valid Contact function
-//   {
-    
-//   }
-// }
-
-//Search Contact function
 
 //Update Database function
