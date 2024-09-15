@@ -127,4 +127,46 @@
 		<script src="js/code.js"></script>
 </body>
 
+<script>
+
+document.getElementById('addContactForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form from submitting the traditional way
+            
+            // Collect form data
+            const First = document.getElementById('contactTextFirst').value;
+            const Last = document.getElementById('contactTextLast').value;
+			const Phone = document.getElementById('contactTextNumber').value;
+			const Email = document.getElementById('contactTextEmail').value;
+            
+            // Prepare data to send
+            const data = { First, Last, Phone, Email};
+            
+            // Send AJAX request
+            fetch('LAMPAPI/AddContact.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+				console.log(result);
+				debugger;
+                if (result.error === "") {
+                    // Redirect to contacts.html on successful login
+                    window.location.href = 'contacts.html';
+                } else {
+                    // Display error message
+                    alert(result.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        });
+        
+        
+
+</script>
+
 </html>
