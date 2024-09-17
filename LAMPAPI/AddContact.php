@@ -1,7 +1,8 @@
 <?php
-// Enable error reporting for debugging
-error_reporting(E_ALL);
+// Enable error reporting
 ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 // Get the incoming JSON data
 $inData = getRequestInfo();
@@ -10,7 +11,7 @@ $inData = getRequestInfo();
 $name = $inData["Name"];
 $phone = $inData["Phone"];
 $email = $inData["Email"];
-$userId = $inData["UserID"]; // ID of the user who owns the contact
+$userId = $inData["UserID"];
 
 // Connect to the database
 $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
@@ -21,21 +22,20 @@ if ($conn->connect_error) {
 } else {
     // Prepare the SQL statement to insert a new contact
     $stmt = $conn->prepare("INSERT INTO Contacts (Name, Phone, Email, UserID) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sssi", $name, $phone, $email, $userId);
-
-    // Execute the statement and check for success
-    if ($stmt->execute()) {
-        // Get the ID of the newly inserted contact
-        $newContactId = $stmt->insert_id;
-        
-        // Return detailed information about the new contact
-        returnWithInfo($newContactId, $name, $phone, $email, $userId);
+    if (!$stmt) {
+        returnWithError($conn->error);
     } else {
-        returnWithError($stmt->error);
+        $stmt->bind_param("sssi", $name, $phone, $email, $userId);
+        
+        // Execute the statement and check for success
+        if (!$stmt->execute()) {
+            returnWithError($stmt->error);
+        } else {
+            $newContactId = $stmt->insert_id;
+            returnWithInfo($newContactId, $name, $phone, $email, $userId);
+        }
+        $stmt->close();
     }
-
-    // Close the statement and the connection
-    $stmt->close();
     $conn->close();
 }
 
