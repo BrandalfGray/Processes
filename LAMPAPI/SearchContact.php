@@ -22,8 +22,8 @@ if ($conn->connect_error) {
 } else {
     // Start with the base SQL query
     $sql = "SELECT * FROM Contacts WHERE (Name LIKE ? AND Phone LIKE ? AND Email LIKE ?)";
-    
-    // Add optional filters for ID and UserID
+
+    // Adjust the SQL query based on the presence of ID and UserID
     if (!is_null($id)) {
         $sql .= " AND ID = ?";
     }
@@ -34,7 +34,7 @@ if ($conn->connect_error) {
     // Prepare the SQL statement
     $stmt = $conn->prepare($sql);
 
-    // Dynamically bind parameters
+    // Dynamically bind parameters based on the conditions
     if (!is_null($id) && !is_null($userId)) {
         $stmt->bind_param("sssii", $name, $phone, $email, $id, $userId);
     } elseif (!is_null($id)) {
@@ -83,4 +83,3 @@ function returnWithError($err)
     $retValue = array("error" => $err);
     sendResultInfoAsJson($retValue);
 }
-?>
