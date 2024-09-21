@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Gators Allowed</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <script src="js/code.js"></script> <!-- Custom JS -->
+</head>
+<body>
+    <h1 id="title">The Huddle Hub</h1>
+    <!-- Login Form -->
+    <div id="loginDiv">
+        <div class="input-container">
+            <i class="fas fa-user"></i>
+            <input type="text" id="login-username" placeholder="Username">
+        </div>
+        <div class="input-container">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="login-password" placeholder="Password">
+        </div>
+
+        <div class="button-container">
+            <button type="button" id="loginButton" class="buttons" onclick="doLogin();">Sign In</button>
+            <!-- Modify this button to trigger toggleForm() to show the signup form -->
+            <button type="button" id="CreateAccountButton" class="buttons" onclick="toggleForm('signupDiv');">Create Account</button>
+        </div>
+        <span id="loginResult"></span>
+    </div>
+
+    <!-- Signup Form -->
+   <!-- Signup Form -->
+<div id="signupDiv" class="hidden">
+    <span id="inner-title">CREATE ACCOUNT</span>
+    <div id="createAccountInput">
+        <div class="input-container">
+            <input type="text" id="signup-firstName" placeholder="First Name">
+        </div>
+        <div class="input-container">
+            <input type="text" id="signup-lastName" placeholder="Last Name">
+        </div>
+        <div class="input-container"> 
+            <input type="text" id="signup-username" placeholder="Username">
+        </div>
+        <div class="input-container">
+            <input type="password" id="signup-password" placeholder="Password">
+        </div>
+        <div class="button-container">
+            <button type="button" id="CreateAccountButton" class="buttons" onclick="doRegister();">Create Account</button>
+            <button type="button" id="returnButton" class="buttons" onclick="toggleForm('loginDiv')">Back to Sign In</button>
+        </div>
+        <span id="registerResult"></span>
+    </div>
+</div>
+
+
+    <!-- Script for toggling forms -->
+    <script>
+        function toggleForm(showDiv) {
+            // Hide both forms initially
+            document.getElementById('loginDiv').classList.add('hidden');
+            document.getElementById('signupDiv').classList.add('hidden');
+            
+            // Show the specified form
+            document.getElementById(showDiv).classList.remove('hidden');
+        }
+    </script>
+
+</body>
+</html>
+
+
+        <!--<div class="center-container">
+            <h1 class="text-center mb-4 ucf-title">
+                <a href="https://github.com/BrandalfGray/Processes" id="welcome" title="Link to our Github">Huddle Hub</a>
+            </h1>
+            <div class="forms">
+                <div class="form-wrapper is-active">
+                    <button type="button" class="switcher switcher-login">
+                        Login
+                        <span class="underline"></span>
+                    </button>
+                    <form id="loginForm" class="form form-login">
+                        <fieldset>
+                            <legend>Please enter your username and password:</legend>
+                            <div class="input-block">
+                                <label for="username">Username</label>
+                                <input id="login-username" name="username" type="text" required />
+                            </div>
+                            <div class="input-block">
+                                <label for="login-password">Password</label>
+                                <input id="login-password" name="password" type="password" required />
+                            </div>
+                        </fieldset>
+                        <button type="submit" class="btn-login">Login</button>
+                    </form>
+                </div>
+                <div class="form-wrapper">
+                    <button type="button" class="switcher switcher-signup">
+                        Sign Up
+                        <span class="underline"></span>
+                    </button>
+                    <form id="signupForm" class="form form-signup">
+                        <fieldset>
+                            <legend>Please enter your first name, last name, username, password, and password confirmation for sign up.</legend>
+                            <div class="input-block">
+                                <label for="signup-firstName">First Name</label>
+                                <input id="signup-firstName" name="firstName" type="text" required />
+                            </div>
+                            <div class="input-block">
+                                <label for="signup-lastName">Last Name</label>
+                                <input id="signup-lastName" name="lastName" type="text" required />
+                            </div>
+                            <div class="input-block">
+                                <label for="signup-username">Username</label>
+                                <input id="signup-username" name="username" type="text" required />
+                            </div>
+                            <div class="input-block">
+                                <label for="signup-password">Password</label>
+                                <input id="signup-password" name="password" type="password" required />
+                            </div>
+                        </fieldset>
+                        <button type="submit" class="btn-signup">Continue</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+   </section> -->
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form from submitting the traditional way
+            
+            // Collect form data
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Prepare data to send
+            const data = { Login: username, Password: password };
+            
+            // Send AJAX request
+            fetch('LAMPAPI/Login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.error === "") {
+                   const UserId = result.id;
+                   const firstName = result.firstName;
+                   const lastName = result.lastName;
+
+                // Save the user data in a cookie
+                saveCookie(firstName, lastName, UserId);
+                    // Redirect to contacts.html on successful login
+                    window.location.href = 'contacts.html';
+
+                } else {
+                    // Display error message
+                    alert(result.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        });
+        
+        document.getElementById('signupForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form from submitting the traditional way
+            
+            // Collect form data
+            const FirstName = document.getElementById('signup-firstName').value;
+            const LastName = document.getElementById('signup-lastName').value;
+            const username = document.getElementById('signup-username').value;
+            const password = document.getElementById('signup-password').value;
+            
+            // Prepare data to send
+            const data = { FirstName, LastName, Login: username, Password: password };
+            
+            // Send AJAX request
+            fetch('LAMPAPI/Register.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.error === "") {
+                    const UserId = result.id;
+                    const firstName = result.firstName;
+                    const lastName = result.lastName;
+
+                // Save the user data in a cookie
+                saveCookie(firstName, lastName, UserId);
+                    // Redirect to contacts.html on successful login
+                    window.location.href = 'contacts.html';
+                } else {
+                    // Display error message
+                    alert(result.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        });
+        
+        const switchers = [...document.querySelectorAll(".switcher")];
+        switchers.forEach((item) => {
+            item.addEventListener("click", function () {
+                switchers.forEach((item) =>
+                    item.parentElement.classList.remove("is-active")
+                );
+                this.parentElement.classList.add("is-active");
+            });
+        });
+    </script>
+</body>
+</html>
