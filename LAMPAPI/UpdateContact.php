@@ -1,4 +1,7 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 // Enable error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -8,9 +11,10 @@ $inData = getRequestInfo();
 
 // Extract contact information from the input data
 $id = $inData["ID"];
-$name = $inData["Name"];
-$phone = $inData["Phone"];
-$email = $inData["Email"];
+$FirstName = $inData["FirstName"];
+$LastName = $inData["LastName"];
+$Phone = $inData["Phone"];
+$Email = $inData["Email"];
 
 // Connect to the database
 $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
@@ -20,13 +24,13 @@ if ($conn->connect_error) {
     returnWithError($conn->connect_error);
 } else {
     // Prepare the SQL statement to update the contact
-    $stmt = $conn->prepare("UPDATE Contacts SET Name=?, Phone=?, Email=? WHERE ID=?");
-    $stmt->bind_param("sssi", $name, $phone, $email, $id);
+    $stmt = $conn->prepare("UPDATE Contacts SET FirstName=?, LastName=?, Phone=?, Email=? WHERE ID=?");
+    $stmt->bind_param("ssssi", $FirstName, $LastName, $Phone, $Email, $id);
 
     // Execute the statement and check for success
     if ($stmt->execute()) {
         if ($stmt->affected_rows > 0) {
-            returnWithInfo($id, $name, $phone, $email);
+            returnWithInfo($id, $FirstName, $LastName, $Phone, $Email);
         } else {
             returnWithError("No contact found with the given ID.");
         }
@@ -60,13 +64,14 @@ function returnWithError($err)
 }
 
 // Function to return success messages
-function returnWithInfo($id, $name, $phone, $email)
+function returnWithInfo($id, $FirstName, $LastName, $Phone, $Email)
 {
     $retValue = array(
         "ID" => $id,
-        "Name" => $name,
-        "Phone" => $phone,
-        "Email" => $email);
+        "FirstName" => $FirstName,
+        "LastName" => $LastName,
+        "Phone" => $Phone,
+        "Email" => $Email);
     sendResultInfoAsJson($retValue);
 }
 ?>

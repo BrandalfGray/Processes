@@ -1,4 +1,8 @@
 <?php
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 // Enable error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -7,11 +11,8 @@ ini_set('display_errors', 1);
 $inData = getRequestInfo();
 
 // Extract search criteria from the input data
-$name = isset($inData["Name"]) ? "%" . $inData["Name"] . "%" : "%";
-$phone = isset($inData["Phone"]) ? "%" . $inData["Phone"] . "%" : "%";
-$email = isset($inData["Email"]) ? "%" . $inData["Email"] . "%" : "%";
-$id = isset($inData["ID"]) ? $inData["ID"] : null;
-$userId = isset($inData["UserID"]) ? $inData["UserID"] : null;
+$Search = isset($inData["Search"]) ? "%" . $inData["Search"] . "%" : "%";
+$UserID = $inData["UserID"];
 
 // Connect to the database
 $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
@@ -21,29 +22,12 @@ if ($conn->connect_error) {
     returnWithError($conn->connect_error);
 } else {
     // Start with the base SQL query
-    $sql = "SELECT * FROM Contacts WHERE (Name LIKE ? AND Phone LIKE ? AND Email LIKE ?)";
+    $sql = "SELECT * FROM Contacts WHERE UserID=? AND ( FirstName LIKE ? OR LastName LIKE ? OR Phone LIKE ? OR Email LIKE ?)";
     
-    // Add optional filters for ID and UserID
-    if (!is_null($id)) {
-        $sql .= " AND ID = ?";
-    }
-    if (!is_null($userId)) {
-        $sql .= " AND UserID = ?";
-    }
-
     // Prepare the SQL statement
     $stmt = $conn->prepare($sql);
 
-    // Dynamically bind parameters
-    if (!is_null($id) && !is_null($userId)) {
-        $stmt->bind_param("sssii", $name, $phone, $email, $id, $userId);
-    } elseif (!is_null($id)) {
-        $stmt->bind_param("sssi", $name, $phone, $email, $id);
-    } elseif (!is_null($userId)) {
-        $stmt->bind_param("sssi", $name, $phone, $email, $userId);
-    } else {
-        $stmt->bind_param("sss", $name, $phone, $email);
-    }
+    $stmt->bind_param("issss",$UserID, $Search, $Search, $Search, $Search);
 
     // Execute the statement and get results
     $stmt->execute();

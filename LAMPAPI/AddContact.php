@@ -1,4 +1,8 @@
 <?php
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 // Enable error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -7,7 +11,8 @@ ini_set('display_errors', 1);
 $inData = getRequestInfo();
 
 // Extract contact information from the input data
-$name = $inData["Name"];
+$FirstName = $inData["FirstName"];
+$LastName = $inData["LastName"];
 $phone = $inData["Phone"];
 $email = $inData["Email"];
 $userId = $inData["UserID"]; // ID of the user who owns the contact
@@ -20,8 +25,8 @@ if ($conn->connect_error) {
     returnWithError($conn->connect_error);
 } else {
     // Prepare the SQL statement to insert a new contact
-    $stmt = $conn->prepare("INSERT INTO Contacts (Name, Phone, Email, UserID) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sssi", $name, $phone, $email, $userId);
+    $stmt = $conn->prepare("INSERT INTO Contacts (FirstName, LastName, Phone, Email, UserID) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssi", $FirstName,$LastName, $phone, $email, $userId);
 
     // Execute the statement and check for success
     if ($stmt->execute()) {
@@ -29,7 +34,7 @@ if ($conn->connect_error) {
         $newContactId = $stmt->insert_id;
         
         // Return detailed information about the new contact
-        returnWithInfo($newContactId, $name, $phone, $email, $userId);
+        returnWithInfo($newContactId, $FirstName,$LastName, $phone, $email, $userId);
     } else {
         returnWithError($stmt->error);
     }
@@ -60,11 +65,12 @@ function returnWithError($err)
 }
 
 // Function to return success messages with contact details
-function returnWithInfo($id, $name, $phone, $email, $userId)
+function returnWithInfo($id, $FirstName, $LastName, $phone, $email, $userId)
 {
     $retValue = array(
         "ID" => $id,
-        "Name" => $name,
+        "FirstName" => $FirstName,
+        "LastName" => $LastName,
         "Phone" => $phone,
         "Email" => $email,
         "UserID" => $userId,
