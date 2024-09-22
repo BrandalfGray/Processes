@@ -10,120 +10,109 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
-	<!--side navigation-->
-	<div class="sidenav">
-		<button type="button" id="logoutButton" class="sidebuttons font" onclick="doLogout();">Logout</button>
-		<a href="contacts.html">Contacts</a>
-		<a href="members.html">About Us</a>
-	</div>
-  
-  
+<!--side navigation-->
+<div class="sidenav">
+    <button type="button" id="logoutButton" class="sidebuttons font" onclick="doLogout();">Logout</button>
+</div>
+
 <body>
-	<div class="custom-container mt-5">
-			
-			<h1 class="text-center mb-4 ucf-text">
-				Welcome User
-			</h1>
-			
-			<div class="row justify-content-center">
-				<div class="col-md-8">
-					
-					<!-- Form Group for Search Bar and Button -->
-					<div class="form-group d-flex align-items-center">
-						<!-- Search Bar -->
-						<input type="text" id="searchInput" class="form-control search-input mr-2" placeholder="Search Contacts..." onkeyup="searchContacts()">
-						
-						<!-- Add Contact Button -->
-						<button class="custom-button ml-2" data-toggle="modal" data-target="#addContactModal">
-							<span style="font-size: 35px; color: black; font-weight: bold; position: relative; top: -3px;">&#43;</span> <!-- Unicode character for plus sign -->
-						</button>
-						
-					</div>
+    <div class="custom-container mt-5">
+        <h1 class="text-center mb-4 ucf-text" id="welcome">Welcome</h1>
 
+        <div class="row justify-content-center">
+            <div class="col-md-8">
 
-					<!-- Table to Display Contacts -->
-					<table class="table table-striped table-custom">
-						<thead>
-							<tr>
-								<th>First Name</th>
-								<th>Last Name</th>
-								<th>Email</th>
-								<th>Phone</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody id="contactsTable">
-							<!-- Contacts will be populated here via JavaScript -->
-						</tbody>
-					</table>
-					
-					
-					<!-- Add Contact Modal -->
-					<div class="modal fade" id="addContactModal" tabindex="-1" role="dialog" aria-labelledby="addContactModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="addContactModalLabel">Add Contact</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									<form id="addContactForm">
-										<input type="text" id="contactTextFirst" class="form-control mb-2" placeholder="First Name" required>
-										<input type="text" id="contactTextLast" class="form-control mb-2" placeholder="Last Name" required>
-										<input type="text" id="contactTextNumber" class="form-control mb-2" placeholder="XXX-XXX-XXXX" required pattern="^[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$">
-										<input type="text" id="contactTextEmail" class="form-control mb-2" placeholder="name@email.com" required pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$">
-									</form>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-									<button type="button" id="addContactButton" class="btn btn-primary" onclick="addContact();">Add Contact</button>
-								</div>
-							</div>
-						</div>
-					</div>
+                <!-- Form Group for Search Bar and Button -->
+                <div class="form-group d-flex align-items-center">
+                    <!-- Search Bar -->
+                    <input type="text" id="searchInput" class="form-control search-input mr-2" placeholder="Search Contacts..." onkeyup="searchContacts()">
+						<div id=searchResult></div>
+                    <!-- Search Contact Button -->
+                    <button class="custom-button search-Button" onclick="searchContacts();">
+                        <span style="font-size: 24px; color: black; font-weight: bold;">SEARCH</span>
+                    </button>
+                </div>
 
-					
-					
-					<!-- Edit Contact Modal -->
-					<div class="modal fade" id="editContactModal" tabindex="-1" role="dialog" aria-labelledby="editContactModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="editContactModalLabel">Edit Contact</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									<form id="editContactForm">
-										<input type="hidden" id="editContactId">
-										<input type="text" id="editContactTextFirst" class="form-control mb-2" placeholder="First Name" required>
-										<input type="text" id="editContactTextLast" class="form-control mb-2" placeholder="Last Name" required>
-										<input type="text" id="editContactTextNumber" class="form-control mb-2" placeholder="XXX-XXX-XXXX" required pattern="^[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$">
-										<input type="text" id="editContactTextEmail" class="form-control mb-2" placeholder="name@email.com" required pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$">
-									</form>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-									<button type="button" id="editContactButton" class="btn btn-primary" onclick="updateContact();">Save Changes</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					
+				<table class="table table-striped table-custom mt-4">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contactsTable">
+                        <!-- Contacts will be populated here via JavaScript -->
+                    </tbody>
+                </table>
+
+                <!-- Add Contact Form Always Visible -->
+                
+				<div class = "add-contact-box">
+					<h3 class = "text-center">Add Contact</h3>
+                <form id="addContactForm" class="mb">
+                    <input type="text" id="contactTextFirst" class="form-control mb-2 text-center" placeholder="First Name" required>
+                    <input type="text" id="contactTextLast" class="form-control mb-2 text-center" placeholder="Last Name" required>
+                    <input type="text" id="contactTextNumber" class="form-control mb-2 text-center" placeholder="XXX-XXX-XXXX">
+                    <input type="text" id="contactTextEmail" class="form-control mb-2 text-center" placeholder="name@email.com">
+                    <span id="addContactResult"></span>
+				</form>
+
+				<div class="button-container">
+					<button type="button" class="custom-button add-Contact" onclick="addContact();">ADD CONTACT</button>
+                        <span style="font-size: 20px; color: rgb(0, 0, 0); font-weight: bold;"></span>
+                    </button>
 				</div>
+
+
+                <!-- Edit Contact Modal -->
+                <div class="modal fade" id="editContactModal" tabindex="-1" role="dialog" aria-labelledby="editContactModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editContactModalLabel">Edit Contact</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="editContactForm">
+                                    <input type="hidden" id="editContactId">
+                                    <input type="text" id="editContactTextFirst" class="form-control mb-2" placeholder="First Name" required>
+                                    <input type="text" id="editContactTextLast" class="form-control mb-2" placeholder="Last Name" required>
+                                    <input type="text" id="editContactTextNumber" class="form-control mb-2" placeholder="XXX-XXX-XXXX" required pattern="^[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$">
+                                    <input type="text" id="editContactTextEmail" class="form-control mb-2" placeholder="name@email.com" required pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" id="editContactButton" class="btn btn-primary" onclick="updateContact();">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
 			</div>
-		</div>
+              
+            </div>
+        </div>
+    </div>
 
+    <!-- JavaScript to Fetch and Display Contacts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/code.js"></script>
+    <script>
+        window.onload = function () {
+          fetchContacts(); // Fetch all contacts when the page loads
+        };
+      </script>
+      
 
-		<!-- JavaScript to Fetch and Display Contacts -->
-		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		<script src="js/code.js"></script>
 </body>
 
 </html>

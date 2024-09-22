@@ -1,7 +1,8 @@
 body {
-    background-image: url('../images/background.jpg'); /* Path to your background image */
+    background-image: url('../images/Wallpaper.jpg'); /* Path to your background image */
     background-size: cover; /* Adjusts the size of the background image to cover the entire page */
     background-position: center; /* Centers the image */
+    min-height: 100vh;
     background-repeat: no-repeat; /* Prevents the image from repeating */
     background-color: #f8f9fa; /* Fallback color if image fails to load */
     font-family: Arial, sans-serif;
@@ -38,7 +39,7 @@ hr {
 }
 
 .ucf-title-link {
-    color: #FFC904; /* UCF Gold by default */
+    color: rgb(255, 201, 4); /* UCF Gold by default */
     text-decoration: none; /* Remove underline */
     transition: color 0.6s ease; /* Smooth transition for color change */
 }
@@ -49,13 +50,13 @@ hr {
 }
 
 .ucf-text {
-    font-family: 'Anton', sans-serif;
+    font-family: 'bebas Neue', sans-serif;
     color: #FFC904; /* UCF Gold */
     text-transform: uppercase; /* Make the text uppercase */
     letter-spacing: 4px; /* Add spacing between letters */
     font-weight: bold;
     text-shadow: 3px 3px 6px #000; /* Create a shadow for a strong, logo-like effect */
-	font-size: 3rem; /* Adjust font size */
+	font-size: 4rem; /* Adjust font size */
 	margin-top: 20px; /* Adjust top margin */
 	margin-bottom: 30px; /* Adjust bottom margin */
 	
@@ -66,6 +67,8 @@ hr {
     background-color: #FFC904; /* UCF Gold */
     color: #000; /* Black text */
     text-transform: uppercase; /* Make the text uppercase */
+    font-size: 20px;
+    font-family: 'bebas Neue', sans-serif;
     font-weight: bold; /* Bold text */
     letter-spacing: 1px; /* Add spacing between letters */
 }
@@ -80,7 +83,9 @@ hr {
 
 .table-custom tbody td {
     background-color: #f9f9f9; /* Light gray background for all cells */
-    color: #333; /* Dark gray text color for all cells */
+    color: #000000; /* Dark gray text color for all cells */
+    font-weight: bold;
+    font-family: 'Anton', sans-serif;
     padding: 10px; /* Add some padding for spacing */
 }
 
@@ -102,7 +107,7 @@ hr {
     position: fixed; /* Fixed position */
     top: 0;
     left: 0;
-    background-color: #000; /* Dark background color */
+    background-color: rgba(0,0,0,0.8);
     padding-top: 20px; /* Space at the top */
     z-index: 1000; /* Ensure it stays on top */
 }
@@ -122,27 +127,102 @@ hr {
 
 /* Hover effect for sidenav links and buttons */
 .sidenav a:hover, .sidenav button:hover {
-    color: blue; /* Change text color on hover */
+    color: rgb(255, 255, 255); /* Change text color on hover */
     text-decoration: underline; /* Add underline on hover */
 }
+.add-contact-box {
+    font-size: 15px;
+    max-width:fit-content;
+    width: 500px;
+    height: auto; /* Adjusted height to fit content */
+    padding: 22px;
+    margin-top:20px;
+    margin-left:auto;
+    margin-right:auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+    text-align: center;
+    overflow: hidden;
+    
+}
 
+/* Match the input styles of the login and signup boxes */
+.add-contact-box input {
+    text-align: center;
+    width: 100%; /* Make the input full width */
+    border-radius: 25px;  
+    margin: 10px 0;
+    font-size: 35px;
+    padding: 15px 10px;   
+    background-color: #fff7d2;        
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    color: black;
+    font-family: 'bebas Neue', sans-serif;
+}
 
-.custom-button {
-    border-radius: 50%; /* Makes the button circular */
-    width: 40px; /* Adjust size as needed */
+.add-contact-box h3 {
+    text-align: center; /* Center the text */
+    margin-bottom: 20px; /* Space below the heading */
+    font-family: 'bebas Neue', sans-serif;
+    font-weight:bold;
+    font-size: 32px; /* Adjust font size as needed */
+    color: #000; /* Change text color if needed */
+}
+
+.button-container {
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center the button horizontally */
+    margin-top: 0px; /* Optional: Add some space above the button */
+}
+
+.add-contact-box .form-control {
+    color: #000;
+}
+
+.add-contact-box .form-control::placeholder {
+    color: #000;
+}
+
+.search-Button {
+    border-radius: 15px;
+    width: 150px; /* Adjust size as needed */
     height: 40px; /* Adjust size as needed */
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #FFC904; /* UCF Gold */
     border: none;
-    color: #FFF;
+    color: #000000;
     cursor: pointer;
-    margin-left: 10px; /* Space between input and button */
+    margin: 0px; /* Space between input and button */
+    font-family: 'Anton', sans-serif;
+    font-size: 35px;
+    font-weight: bold;
 }
 
+.add-Contact {
+    width: 100%;
+    padding: 10px; /* Matches input field padding */
+    border: 3px solid #000000; /* Matches input field border */
+    background-color: rgba(255, 205, 4, 0.9); /* Button color */
+    color: black; /* Change to black for consistency */
+    border-radius: 20px; /* Same rounded corners as input fields */
+    cursor: pointer;
+    margin-top: 10px;
+
+    font-family: 'Anton', sans-serif;
+    font-size:35px;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
 .custom-button:hover {
-    background-color: #FFD700; /* Slightly different gold on hover */
+    background-color: #ffffff; /* Slightly different gold on hover */
 }
 
 .custom-button:focus {
@@ -174,6 +254,7 @@ hr {
 
 
 
+
 .login-link {
     font-family: 'Anton', sans-serif; /* Same font as title */
     color: #FFC904; /* UCF Gold */
@@ -200,7 +281,7 @@ hr {
 
 
 .auth-container {
-    background-color: #ffffff;
+    background-color: rgba(255,255,255,0.9);
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0,0,0,0.1);

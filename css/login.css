@@ -9,9 +9,12 @@
 body {
     margin: 0; /* Remove the default body margin */
     font-family: Roboto, -apple-system, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; /* Applies this font Family */
-    background-image: url('../images/background.jpg'); /* Path to your background image */
+    background-image: url('../images/Wallpaper.jpg'); /* Path to your background image */
     background-size: cover; /* Adjusts the size of the background image to cover the entire page */
     background-position: center; /* Centers the image */
+    background-position: fixed;
+    min-height: 100vh;
+    overflow: hidden;
     background-repeat: no-repeat; /* Prevents the image from repeating */
     background-color: #ffffff; /* Fallback color if image fails to load */
 } 
@@ -21,6 +24,7 @@ body {
     flex-direction: column; /* Aligns forms vertically */
     justify-content: center; /* Centers forms vertically */
     align-items: center; /* Centers forms horizontally */
+    max-width: 100%;
 }
 
 .section-title {
@@ -38,58 +42,18 @@ body {
 
 /* Applies animations to show or hide a form */
 .form-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     animation: hideLayer .3s ease-out forwards;
 }
-.form-wrapper.is-active {
-    animation: showLayer .3s ease-in forwards;
-}
 
-/* Flex Container Animation */
-@keyframes showLayer {
-    50% {
-        z-index: 1;
-    }
-    100% {
-        z-index: 1;
-    }
+.form-wrapper form{
+    display:none;
 }
-
-@keyframes hideLayer {
-    0% {
-        z-index: 1;
-    }
-    49.999% {
-        z-index: 1;
-    }
-}
-
-.switcher {
-    position: relative;
-    cursor: pointer;
+.form-wrapper.is-active form{
     display: block;
-    margin-right: auto;
-    margin-left: auto;
-    padding: 0;
-    text-transform: uppercase;
-    font-family: inherit;
-    font-size: 16px;
-    letter-spacing: .5px;
-    color: #999;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    transform: translateX(0);
-    transition: all .3s ease-out;
-}
-
-.form-wrapper.is-active .switcher-login {
-    color: #fff;
-    transform: translateX(90px); /* Shifts switcher to the left or right */
-}
-
-.form-wrapper.is-active .switcher-signup {
-    color: #fff;
-    transform: translateX(-90px);
 }
 
 .underline {
@@ -115,18 +79,6 @@ body {
     transition: transform .2s ease-out;
 }
 
-.switcher-login .underline::before {
-    transform: translateX(101%);
-}
-
-.switcher-signup .underline::before {
-    transform: translateX(-101%);
-}
-
-.form-wrapper.is-active .underline::before {
-    transform: translateX(0);
-}
-
 .form {
     overflow: hidden;
     min-width: 260px;
@@ -146,7 +98,7 @@ body {
 
 @keyframes showLogin {
     0% {
-        background: #d7e7f1;
+        background: #000000;
         transform: translate(40%, 10px);
     }
     50% {
@@ -167,7 +119,7 @@ body {
         transform: translate(0, 0);
     }
     100% {
-        background: #d7e7f1;
+        background: #FFC904;
         transform: translate(40%, 10px);
     }
 }
@@ -180,33 +132,7 @@ body {
     animation: showSignup .3s ease-in forwards;
 }
 
-@keyframes showSignup {
-    0% {
-        background: #d7e7f1;
-        transform: translate(-40%, 10px) scaleY(.8);
-    }
-    50% {
-        transform: translate(0, 0) scaleY(.8);
-    }
-    100% {
-        background-color: #fff;
-        transform: translate(-35%, -20px) scaleY(1);
-    }
-}
 
-@keyframes hideSignup {
-    0% {
-        background-color: #fff;
-        transform: translate(-35%, -20px) scaleY(1);
-    }
-    50% {
-        transform: translate(0, 0) scaleY(.8);
-    }
-    100% {
-        background: #d7e7f1;
-        transform: translate(-40%, 10px) scaleY(.8);
-    }
-}
 
 .form fieldset {
     position: relative;
@@ -245,7 +171,7 @@ body {
 
 .input-block label {
     font-size: 14px;
-    color: #a1b4b4;
+    color: #000000;
 }
 
 .input-block input {
@@ -258,7 +184,7 @@ body {
     line-height: 40px;
     color: #3b4465;
     background: #eef9fe;
-    border: 1px solid #cddbef;
+    border: 1px solid #FFC904;
     border-radius: 2px;
 }
 
@@ -281,9 +207,10 @@ body {
 }
 
 .btn-login {
-    color: #fbfdff;
-    background: #a7e245;
+    color: #000000;
+    background: #FFC904;
     transform: translateX(-30%);
+    font-family: 'Anton', sans-serif;
 }
 
 .btn-signup {
@@ -291,4 +218,203 @@ body {
     background: #fbfdff;
     box-shadow: inset 0 0 0 2px #a7e245;
     transform: translateX(30%);
+}
+
+/* Targets all elements and applies the box-sizing: border-box attribute to them */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    height: 100vh;          /* Full viewport height */
+    margin: 0;              /* Remove default margin */
+}
+
+#title {
+    font-size: 180px;
+    width: 100%;
+    margin: 0;
+    padding: 0px;
+    font-family:'bebas Neue', sans-serif;
+    color: #FFC904; /* UCF Gold */
+    text-align: center;
+    position: absolute;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 400;
+    font-style: normal;
+    top: 1px;
+    margin-top: 20px; /* Adjust top margin */
+	margin-bottom: 30px; /* Adjust bottom margin */
+}
+
+#inner-title, #loginResult, #colorAddResult {
+    display: inline-block;
+    font-size: 50px;
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;               
+    font-family: 'bebas Neue', sans-serif;
+    font-weight:bold;
+}
+
+#loginDiv, #signupDiv {
+    position: absolute;
+    font-size: 15px;
+    width: 80%; /* Changed to 80% for responsiveness */
+    max-width: 600px; /* Added max-width to maintain a cap */
+    height: auto; /* Keep auto for fitting content */
+    max-height: 850px;
+    margin-top: 40px;
+    padding: 50px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1);
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust to keep centered */
+}
+
+ #login-username, #login-password {
+    text-align: center;
+    width: 100%; /* Full width for input fields */
+    border-radius: 25px;  
+    margin: 10px;
+    font-size: 35px;
+    padding: 15px 10px;   
+    background-color: #fff7d2;        
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+#signup-firstName, #signup-lastName, #signup-username, #signup-password {
+    text-align: center;
+    width: 100%; /* Full width for input fields */
+    border-radius: 25px;  
+    margin: 10px;
+    font-size: 35px;
+    padding: 15px 10px;   
+    background-color: #fff7d2;        
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+#loggedInDiv, #accessUIDiv {
+    font-size: 18px;
+    width: 50%;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+}
+/* Body Styling */
+body {
+    margin: 0; /* Remove the default body margin */
+    font-family: Roboto, -apple-system, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; /* Applies this font Family */
+    background-image: url('../images/Wallpaper.jpg'); /* Path to your background image */
+    background-size: cover; /* Adjusts the size of the background image to cover the entire page */
+    background-position: center; /* Centers the image */
+    background-attachment: fixed; /* Fixes the image position */
+    min-height: 100vh;
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-color: #ffffff; /* Fallback color if image fails to load */
+} 
+
+
+
+
+/* Style for input container */
+.input-container {
+    display: flex; /* Use flexbox */
+    align-items: center; /* Vertically align items */
+    margin-bottom: 20px; /* Space between inputs */
+    
+
+}
+
+.input-container i {
+    margin-right: 5px; /* Space between icon and input */
+    color: #000000; /* Color of the icons, adjust as needed */
+    font-size: 20px;
+    border-radius: 10px;
+    border:white;
+}
+
+.input-container input {
+    flex: 1; /* Allow input to take the remaining space */
+    padding: 10px; /* Padding inside the input */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded input fields */
+   color:black;
+   font-family: 'Alton', sans-serif;
+}
+
+.addcreateAccountInput input{
+    flex: 1; /* Allow input to take the remaining space */
+    padding: 10px; /* Padding inside the input */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded input fields */
+   color:black;
+   font-family: 'bebas Neue', sans-serif;
+}
+
+
+
+/* Style for the input fields */
+input[type="text"], input[type="password"] {
+    width: 100%;                              /* Make the input full width */
+    padding: 10px;                            /* Padding inside the input */
+    border: 3px solid #000000;                   /* Light border */
+    border-radius: 5px;                       /* Rounded input fields */
+    box-sizing: border-box;                   /* Ensures padding doesn't affect width */
+}
+
+input[type="text"], input[type="signup-firstName"]{
+    width: 100%;                              /* Make the input full width */
+    padding: 10px;                            /* Padding inside the input */
+    border: 3px solid #000000;                   /* Light border */
+    border-radius: 5px;                       /* Rounded input fields */
+    box-sizing: border-box;     
+}
+
+input::placeholder{
+    font-family: 'Anton',sans-serif;
+    color: rgb(0,0,0,0.6);
+    font-weight: bold;
+    opacity: 1;
+}
+
+
+.buttons {
+    width: 100%;
+    padding: 10px; /* Matches input field padding */
+    border: 3px solid #000000; /* Matches input field border */
+    background-color: rgba(255, 205, 4, 0.9); /* Button color */
+    color: black; /* Change to black for consistency */
+    border-radius: 20px; /* Same rounded corners as input fields */
+    cursor: pointer;
+    margin-top: 10px;
+
+    font-family: 'Anton', sans-serif;
+    font-size:35px;
+    font-weight: bold;
+}
+
+.buttons:hover {
+    background-color: #ffffff;                /* Darker color on hover */
+}
+
+/* Style for the "Sign Up" and "Back to Sign In" buttons in the second form */
+.button-container {
+    margin-top: 20px;
+}
+
+/* Styling the hidden signup div */
+.hidden {
+    display: none;
 }
