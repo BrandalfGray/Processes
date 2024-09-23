@@ -71,7 +71,7 @@ function doRegister() {
 
     // Optionally, redirect to login page after successful registration
     setTimeout(() => {
-      window.location.href = "contacts.html";
+      doLogin(userName, password);
     }, 2000); // Redirect after 2 seconds
   });
 }
@@ -105,13 +105,13 @@ function addContact() {
   var phoneRegex = /^[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/;
   var emailRegex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})/;
 
-  if (phoneRegex.test(phone) == false) {
-    document.getElementById("addContactResult").innerHTML = "Phone Number is Invalid"
+  if (!phoneRegex.test(phone)) {
+    document.getElementById("addContactResult").innerHTML = "Phone Number is Invalid";
     return;
   }
 
-  if (emailRegex.test(email) == false) {
-    document.getElementById("addContactResult").innerHTML = "Email address is invalid"
+  if (!emailRegex.test(email)) {
+    document.getElementById("addContactResult").innerHTML = "Email address is invalid";
     return;
   }
 
@@ -122,23 +122,32 @@ function addContact() {
 
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-type", "application/json; charset =UTF-8");
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-  try {
-    xhr.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
+  xhr.onreadystatechange = function () {
+    if (this.readyState == 4) {
+      if (this.status == 200) {
+        // Parse the response from the server
+        let response = JSON.parse(this.responseText);
+
+        // Check for errors in the response
+        if (response.error) {
+          document.getElementById("addContactResult").innerHTML = "Failed to add contact: " + response.error;
+          return;
+        }
+
         document.getElementById("addContactResult").innerHTML = "Contact has been added";
 
         // Clear the form fields after successful addition
         document.getElementById("addContactForm").reset();
 
-        // Parse the response to get the newly added contact (if needed)
-        let newContact = JSON.parse(this.responseText);
-
         // Add the new contact to the contacts table dynamically
         let table = document.getElementById("contactsTable");
         let newRow = table.insertRow();
-        
+
+        // Set the contact ID as an attribute on the row
+        newRow.setAttribute("data-contact-id", response.ID);  // Assuming response contains the new contact's ID
+
         // Set the cell values
         let cell1 = newRow.insertCell(0);
         let cell2 = newRow.insertCell(1);
@@ -156,16 +165,19 @@ function addContact() {
           <button onclick="openEditContactModal(this)">Edit</button> 
           <button onclick="deleteContact(this)">Delete</button>
         `;
+      } else {
+        document.getElementById("addContactResult").innerHTML = "Error adding contact. Please try again.";
       }
-    };
-    
+    }
+  };
+
+  try {
     xhr.send(jsonPayload);
-    newRow.setAttribute("data-contact-id", response.ID);
   } catch (err) {
     console.log(err.message);
   }
-
 }
+
 
 
 
